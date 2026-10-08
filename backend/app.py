@@ -64,11 +64,12 @@ raw_origins = os.getenv(
     "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://127.0.0.1:3000",
 )
 allowed_origins = [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
+allow_credentials = False if "*" in allowed_origins else True
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
-    allow_credentials=True,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
